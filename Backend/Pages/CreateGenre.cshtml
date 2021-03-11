@@ -1,0 +1,14 @@
+﻿@page
+@using Backend.Pages
+@model CreateGenreModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create Genre";
+}
+<div class="Container">
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <p>Name: <input type="text" name="Genre.Name" placeholder="Enter name..."></p>
+        <p><input type="submit" value="Add"></p>
+    </form>
+</div>

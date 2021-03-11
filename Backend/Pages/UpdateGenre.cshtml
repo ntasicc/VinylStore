@@ -1,0 +1,15 @@
+﻿@page
+@using Backend.Pages
+@model UpdateGenreModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Update genre";
+}
+<div class="Container">
+    <h1>You are updating : @Model.Genre.Name</h1>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <p><input type="text" name="Genre.Name" value="@Model.Genre.Name"></p>
+        <p><input type="submit" value="Update"></p>
+    </form>
+</div>

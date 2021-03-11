@@ -1,0 +1,35 @@
+﻿@page
+@using Backend.Pages
+@model GenresModel
+@{
+    ViewData["Title"]="Genres";
+    Layout="_Layout";
+}
+@section Styles {
+    <link rel="stylesheet" href="Styles/razorstyle.css">
+}
+
+<a class="create" href="CreateGenre">Create Genre</a>
+
+<h2>List of all genres</h2>
+<div class="table-wrapper">
+<table class="fl-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach(var item in Model.Gen)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td><a href="UpdateGenre?id=@item.ID">Update this genre</a></td>
+            <td><a href="DeleteGenre?id=@item.ID">Delete this genre</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+.vinyl
+{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+.divImg
+{
+  position: relative;
+  height: 100%;
+	width: 100%;
+}
+
+.divImg button
+{
+  width: 25px;
+  position: absolute;
+  display: inline-block;
+  z-index: 5;
+  border: 1px solid black;
+}
+.deleteBtn
+{
+  right:0px;
+  background-color: rgb(199, 81, 81);
+
+}
+.editBtn
+{
+  background-color: rgb(87, 233, 87);
+  right:26px;
+}
+.image{
+  
+  max-width: 100%;
+  max-height: 100%;
+  object-fit:fill;
+
+}
+.header{
+    width: 100%;
+    height: 250px;
+}
+.banner{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.name{
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+.performer
+{
+    font-size: 20px;
+    text-align: center;
+}
+
+.price
+{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.genreCont
+{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+.vinylArray
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 25px;
+    padding-left: 100px;
+
+   
+}
+
+.genreTitle
+{
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 2px 2px 5px red;
+    flex-grow: 1;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(63, 62, 62);
+    
+  }
+  
+  .navbar a {
+    float: left;
+    width: 200px;
+    display: block;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: rgb(240, 92, 6);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    border: 1px solid black;
+  }
+
+  .navbar a:hover {
+    background-color: rgb(235, 126, 37);
+    color: black;
+  }
+
+  .fullDiv {  
+    display: flex;
+
+  }
+  
+  
+  .sideDiv {
+    flex: 30%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 200px;
+    position: relative;
+  }
+  
+  .mainDiv {  
+    
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+    
+  }
+
+  .footer {
+        text-align: center;
+        padding: 20px;
+        color:white;
+        background-color: rgb(100, 96, 96);
+    }
+
+  @media screen and (max-width: 700px) {
+    .fullDiv {   
+      flex-direction: column;
+    }
+  }
+  
+  
+  @media screen and (max-width: 400px) {
+    .navbar button {
+      float: none;
+      width: 100%;
+    }
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .sideDiv label{
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+  }
+
+  .sideDiv input{
+    width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  padding: 10px 20px 10px 20px;
+  
+  } 
+
+  .add
+  {
+    align-self: center;
+    margin-top: 40px;
+    font-size: 20px;
+    padding: 10px 30px 10px 30px;
+    background-color: rgb(240, 92, 6);
+    border-radius: 12px;
+  }
+
+  .add:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 40px 0 rgba(0,0,0,0.19);
+  }
+
+  .div1
+  {
+    width:100%;
+    height: 200px;
+  }
+  .img
+  {
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .resetForm
+  {
+    position: absolute;
+    right:0;
+    width: 30px;
+    text-align: center;
+    background-color: red;
+    border-radius: 8px;
+  }
+  
