@@ -63,8 +63,8 @@ export class Shop
         }
         sideDiv.appendChild(resetBtn);
 
-        let labelHTML=["Album","Performer","Price"];
-        let inputType=["text","text","number"];
+        let labelHTML=["Album","Performer","Price","Cover"];
+        let inputType=["text","text","number","text"];
         for(let i=0; i<labelHTML.length;i++)
         {
         let label= document.createElement("label");
@@ -78,7 +78,7 @@ export class Shop
         sideDiv.appendChild(input);
         }
 
-        let label= document.createElement("label");
+        /*let label= document.createElement("label");
         label.innerHTML="Cover";
         sideDiv.appendChild(label);
 
@@ -87,20 +87,22 @@ export class Shop
         input.classList.add("Cover");
         input.placeholder="Enter..";
         sideDiv.appendChild(input);
+        */
 
         const addBtt=document.createElement("button");
         addBtt.innerHTML="Add";
         addBtt.classList.add("add");
         addBtt.onclick=ev =>{
             let a=document.querySelector(".add");
-            if(a.innerHTML==="Add")
+            this.AddOrUpdateVinyl(a.innerHTML);
+            /*if(a.innerHTML==="Add")
             {
                 this.AddVinyl();
             }
             if(a.innerHTML==="Update")
             {
                 this.UpdateVinyl();
-            }
+            }*/
         }
         sideDiv.appendChild(addBtt);
 
@@ -118,15 +120,52 @@ export class Shop
 
     
 
-    AddVinyl()
+    AddOrUpdateVinyl(type)
     {
         const namee =document.querySelector(".Album").value;
         const performerr =document.querySelector(".Performer").value;
         const pricee =document.querySelector(".Price").value;
         const imgg=document.querySelector(".Cover").value;
-        const idd=0;
+        //const idd=0;
 
-        let a;
+        if(type=="Add")
+        {
+            const idd=0;
+            let a;
+        this.genres.forEach(el =>
+            {
+                if(el.name===document.querySelector(".genreTitle").innerHTML)
+                {
+                    a=el;
+                }
+            });
+            console.log(a);
+        fetch("https://localhost:5001/Record/CreateVinyl/"+a.id,{
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id: idd,
+                            name: namee,
+                            performer: performerr,
+                            price: pricee,
+                            img: imgg
+
+                    })
+                }).then(p => {
+                    if(p.ok){
+                        console.log("Succesful")
+                    }
+                    else if(p.status == 406){
+                        alert("Input all informations.");
+                    }
+                }).catch(p=>
+                            {
+                                console.log("Error: "+p);
+                            });
+        }
+        /*let a;
         this.genres.forEach(el =>
             {
                 if(el.name===document.querySelector(".genreTitle").innerHTML)
@@ -159,6 +198,36 @@ export class Shop
                             {
                                 alert("Error: "+p);
                             });
+                            */
+        else if(type=="Update")
+        {
+            const idd=document.querySelector(".add").value;;
+
+        fetch("https://localhost:5001/Record/UpdateVinyl",{
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id: idd,
+                            name: namee,
+                            performer: performerr,
+                            price: pricee,
+                            img: imgg
+
+                    })
+                }).then(p => {
+                    if(p.ok){
+                        console.log("Succesful")
+                    }
+                    else if(p.status == 406){
+                        alert("Input all informations.");
+                    }
+                }).catch(p=>
+                            {
+                                console.log("Error: "+p);
+                            });
+        }
         let div=  document.querySelector(".mainDiv");
         div.innerHTML=""; 
         location.reload();
@@ -166,7 +235,7 @@ export class Shop
 
     }
 
-    UpdateVinyl()
+    /*UpdateVinyl()
     {
         const namee =document.querySelector(".Album").value;
         const performerr =document.querySelector(".Performer").value;
@@ -203,6 +272,7 @@ export class Shop
         location.reload();
         this.resetForm();
     }
+    */
 
     resetForm()
     {

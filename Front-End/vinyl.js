@@ -6,7 +6,7 @@ export class Vinyl
         this.name=name;
         this.performer=performer;
         this.price=price;
-        this.img="./img/"+img+".jpg";
+        this.img=img;
         this.miniCont=null;
     }
 
@@ -57,7 +57,18 @@ export class Vinyl
         div2.classList.add("divInfo");
         this.miniCont.appendChild(div2);
 
-        const vinylName=document.createElement("p");
+        const infoArray =[this.name,this.performer,this.price+"€"];
+        const classArray=["name","performer","price"];
+
+        for(let i=0; i< infoArray.length;i++)
+        {
+            let vinylInfo=document.createElement("p");
+            vinylInfo.innerHTML=infoArray[i];
+            vinylInfo.classList.add(classArray[i]);
+            div2.appendChild(vinylInfo);
+        }
+
+        /*const vinylName=document.createElement("p");
         vinylName.innerHTML=this.name;
         vinylName.classList.add("name");
         div2.appendChild(vinylName);
@@ -71,6 +82,7 @@ export class Vinyl
         cost.innerHTML=this.price + "€";
         cost.classList.add("price");
         div2.appendChild(cost);
+        */
     }
 
     fillEditForm()
