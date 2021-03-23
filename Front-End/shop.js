@@ -37,6 +37,7 @@ export class Shop
             {
                 mainDiv.innerHTML="";
                 a.drawGenre(mainDiv);
+                resetBtn.click();
             }
             genreButt.href="#";
             navbar.appendChild(genreButt);
