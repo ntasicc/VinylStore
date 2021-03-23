@@ -29,6 +29,7 @@ export class Vinyl
             parent.removeChild(this.miniCont);
             console.log(this.id);
             this.deleteVinyl(this.id);
+            location.reload();
         }
         div1.appendChild(deleteBtn);
 

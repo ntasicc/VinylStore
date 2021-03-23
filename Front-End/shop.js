@@ -162,6 +162,7 @@ export class Shop
             refreshhBtt.classList.add("refreshBtt");
             refreshhBtt.hidden=true;
             refreshhBtt.onclick=ev =>{
+                
                 const vinArr=document.querySelector(".vinylArray")
                 vinArr.innerHTML="";
                 const currentGenre=document.querySelector(".genreTitle").innerHTML;
@@ -175,6 +176,7 @@ export class Shop
                             });
                         }
                     });
+                   
                     refreshhBtt.hidden=true;
             }
             buttonDiv.appendChild(refreshhBtt);
@@ -254,7 +256,7 @@ export class Shop
                                 console.log("Error: "+p);
                             });
         }
-        const refreshBtn=document.querySelector(".refreshBtt").click();
+        location.reload();
         this.resetForm();
 
     }
