@@ -78,33 +78,16 @@ export class Shop
         sideDiv.appendChild(input);
         }
 
-        /*let label= document.createElement("label");
-        label.innerHTML="Cover";
-        sideDiv.appendChild(label);
-
-        var input=document.createElement("input");
-        input.type="text";
-        input.classList.add("Cover");
-        input.placeholder="Enter..";
-        sideDiv.appendChild(input);
-        */
-
         const addBtt=document.createElement("button");
         addBtt.innerHTML="Add";
         addBtt.classList.add("add");
         addBtt.onclick=ev =>{
             let a=document.querySelector(".add");
             this.AddOrUpdateVinyl(a.innerHTML);
-            /*if(a.innerHTML==="Add")
-            {
-                this.AddVinyl();
-            }
-            if(a.innerHTML==="Update")
-            {
-                this.UpdateVinyl();
-            }*/
+           
         }
         sideDiv.appendChild(addBtt);
+        this.drawSearchArea(sideDiv);
 
         const mainDiv=document.createElement("div");
         mainDiv.classList.add("mainDiv");
@@ -118,7 +101,84 @@ export class Shop
         host.appendChild(footer);  
     }
 
+    drawSearchArea(host)
+    {
+        let label= document.createElement("label");
+        label.innerHTML="Max price";
+        host.appendChild(label);
     
+        let input=document.createElement("input");
+        input.type="number";
+        input.classList.add("maxPrice");
+        input.placeholder="Enter..";
+        host.appendChild(input);
+
+        const buttonDiv= document.createElement("div");
+        buttonDiv.classList.add("buttonDiv");
+        host.appendChild(buttonDiv);
+
+    
+        const searchBtt=document.createElement("button");
+        searchBtt.innerHTML="Search";
+        searchBtt.classList.add("searchBtt");
+        searchBtt.onclick=ev =>{
+                const inp=document.querySelector(".maxPrice").value;
+                if(inp=="")
+                    alert("Enter price range!");
+                else{
+                    const vinArr=document.querySelector(".vinylArray");
+                    vinArr.innerHTML="";
+                    const currentGenre=document.querySelector(".genreTitle").innerHTML;
+                    let i=0;
+                    this.genres.forEach(el=>
+                        {
+                            if(el.getName() == currentGenre )
+                            {
+                                el.getVinyls().forEach(v => {
+                                    if(v.getPrice()<= inp)
+                                       { v.drawVinyl(vinArr);
+                                         i++;
+                                       }
+                                })
+                                if(i==0)
+                                {
+                                    alert("No records were found");
+                                    el.getVinyls().forEach(v => {
+                                        v.drawVinyl(vinArr);
+                                });
+                                }
+                                else
+                                {
+                                    refreshhBtt.hidden=false;
+                                }
+                            }
+                        });
+                    
+                }
+            }
+            buttonDiv.appendChild(searchBtt);
+            const refreshhBtt=document.createElement("button");
+            refreshhBtt.innerHTML="&#8634";
+            refreshhBtt.classList.add("refreshBtt");
+            refreshhBtt.hidden=true;
+            refreshhBtt.onclick=ev =>{
+                const vinArr=document.querySelector(".vinylArray")
+                vinArr.innerHTML="";
+                const currentGenre=document.querySelector(".genreTitle").innerHTML;
+                this.genres.forEach(el=>
+                    {
+                        if(el.getName() == currentGenre )
+                        {
+                            el.getVinyls().forEach(v => {
+                                
+                                    v.drawVinyl(vinArr);
+                            });
+                        }
+                    });
+                    refreshhBtt.hidden=true;
+            }
+            buttonDiv.appendChild(refreshhBtt);
+    }
 
     AddOrUpdateVinyl(type)
     {
@@ -126,7 +186,7 @@ export class Shop
         const performerr =document.querySelector(".Performer").value;
         const pricee =document.querySelector(".Price").value;
         const imgg=document.querySelector(".Cover").value;
-        //const idd=0;
+        
 
         if(type=="Add")
         {
@@ -165,40 +225,6 @@ export class Shop
                                 console.log("Error: "+p);
                             });
         }
-        /*let a;
-        this.genres.forEach(el =>
-            {
-                if(el.name===document.querySelector(".genreTitle").innerHTML)
-                {
-                    a=el;
-                }
-            });
-            console.log(a);
-        fetch("https://localhost:5001/Record/CreateVinyl/"+a.id,{
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            id: idd,
-                            name: namee,
-                            performer: performerr,
-                            price: pricee,
-                            img: imgg
-
-                    })
-                }).then(p => {
-                    if(p.ok){
-                        console.log("Succesful")
-                    }
-                    else if(p.status == 406){
-                        alert("Input all informations.");
-                    }
-                }).catch(p=>
-                            {
-                                alert("Error: "+p);
-                            });
-                            */
         else if(type=="Update")
         {
             const idd=document.querySelector(".add").value;;
@@ -228,51 +254,10 @@ export class Shop
                                 console.log("Error: "+p);
                             });
         }
-        let div=  document.querySelector(".mainDiv");
-        div.innerHTML=""; 
-        location.reload();
+        const refreshBtn=document.querySelector(".refreshBtt").click();
         this.resetForm();
 
     }
-
-    /*UpdateVinyl()
-    {
-        const namee =document.querySelector(".Album").value;
-        const performerr =document.querySelector(".Performer").value;
-        const pricee =document.querySelector(".Price").value;
-        const imgg=document.querySelector(".Cover").value;
-        const idd=document.querySelector(".add").value;;
-
-        fetch("https://localhost:5001/Record/UpdateVinyl",{
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            id: idd,
-                            name: namee,
-                            performer: performerr,
-                            price: pricee,
-                            img: imgg
-
-                    })
-                }).then(p => {
-                    if(p.ok){
-                        console.log("Succesful")
-                    }
-                    else if(p.status == 406){
-                        alert("Input all informations.");
-                    }
-                }).catch(p=>
-                            {
-                                alert("Error: "+p);
-                            });
-        let div=  document.querySelector(".mainDiv");
-        div.innerHTML=""; 
-        location.reload();
-        this.resetForm();
-    }
-    */
 
     resetForm()
     {
@@ -291,5 +276,7 @@ export class Shop
          edit=document.querySelector(".add");
          edit.innerHTML="Add";
         edit.value=this.id;
+        edit=document.querySelector(".maxPrice");
+        edit.value="";
     }
 }

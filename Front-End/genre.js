@@ -40,4 +40,14 @@ export class Genre
             }
         }
     }
+
+    getName()
+    {
+        return this.name;
+    }
+
+    getVinyls()
+    {
+        return this.vinyls;
+    }
 }

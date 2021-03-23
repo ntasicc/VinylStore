@@ -85,6 +85,11 @@ export class Vinyl
         */
     }
 
+    getPrice()
+    {
+        return this.price;
+    }
+
     fillEditForm()
     {
         let edit=document.querySelector(".Album");
@@ -97,8 +102,7 @@ export class Vinyl
         edit.value=this.price;
 
          edit=document.querySelector(".Cover");
-         let a=this.img.slice(5);
-        edit.value=a.split('/').pop().split('.')[0];
+        edit.value=this.img;
 
          edit=document.querySelector(".add");
          edit.innerHTML="Update";
