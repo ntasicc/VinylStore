@@ -7,6 +7,7 @@ export class Genre
         this.name=name;
         this.id=id;
         this.miniCont=null;
+        this.mainCont=null;
     }
 
     addVinyl(vin)
@@ -14,8 +15,9 @@ export class Genre
         this.vinyls.push(vin);
     }
 
-    drawGenre(host)
+    drawGenre(host, mCont)
     {
+        this.mainCont=mCont;
         this.miniCont=document.createElement("div");
         this.miniCont.classList.add("genreCont");
         host.appendChild(this.miniCont);
@@ -28,7 +30,7 @@ export class Genre
         const vinylDiv=document.createElement("div");
         vinylDiv.classList.add("vinylArray");
         this.vinyls.forEach(element => {
-            element.drawVinyl(vinylDiv);
+            element.drawVinyl(vinylDiv,this.mainCont);
         });
         this.miniCont.appendChild(vinylDiv);
     }

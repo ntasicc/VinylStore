@@ -3,10 +3,14 @@ import { Genre } from "./genre.js"
 
 export class Shop
 {
-    constructor()
+    constructor(id,name,location,bannerImg)
     {
+        this.id=id;
         this.genres=[];
         this.container=null;
+        this.name=name;
+        this.location=location;
+        this.bannerImg=bannerImg;
     }
 
     addGenre(gen)
@@ -15,19 +19,23 @@ export class Shop
     }
     drawShop(host)
     {
+        this.container=document.createElement("div");
+        this.container.classList.add("shopDIV");
+        host.appendChild(this.container);
+
         const banner=document.createElement("div");
         banner.classList.add("header");
-        host.appendChild(banner);
+        this.container.appendChild(banner);
 
         const imgg=document.createElement("img");
-        imgg.src="./img/RSC-Logo-no_location-black-GS.jpg";
+        imgg.src=this.bannerImg;
         imgg.classList.add("banner");
         banner.appendChild(imgg);
 
         const navbar=document.createElement("div");
         navbar.classList.add("navbar");
         navbar.id="navbar";
-        host.appendChild(navbar);
+        this.container.appendChild(navbar);
 
         let genreButt;
         this.genres.forEach(el=>{
@@ -39,7 +47,7 @@ export class Shop
                 a.drawGenre(mainDiv);
                 resetBtn.click();
             }
-            genreButt.href="#";
+            //genreButt.href="#";
             navbar.appendChild(genreButt);
         })(el);
             
@@ -49,7 +57,7 @@ export class Shop
 
         const fullDiv= document.createElement("div");
         fullDiv.classList.add("fullDiv");
-        host.appendChild(fullDiv);
+        this.container.appendChild(fullDiv);
 
         const sideDiv=document.createElement("div");
         sideDiv.classList.add("sideDiv");
@@ -83,7 +91,7 @@ export class Shop
         addBtt.innerHTML="Add";
         addBtt.classList.add("add");
         addBtt.onclick=ev =>{
-            let a=document.querySelector(".add");
+            let a=this.container.querySelector(".add");
             this.AddOrUpdateVinyl(a.innerHTML);
            
         }
@@ -94,12 +102,15 @@ export class Shop
         mainDiv.classList.add("mainDiv");
         fullDiv.appendChild(mainDiv);
 
-        this.genres[0].drawGenre(mainDiv);
+        if(this.genres[0]!=null)
+            this.genres[0].drawGenre(mainDiv,this.container);
 
         const footer= document.createElement("div");
         footer.classList.add("footer");
-        footer.innerHTML="Nikola Tasic 17486 @ELEKTORONSKI FAKULTET U NISU,PROJEKAT IZ WEB-a";
-        host.appendChild(footer);  
+        footer.innerHTML=`Welcome to ${this.name}, location of this store is: ${this.location} <br /> Nikola Tasic 17486 @ELEKTORONSKI FAKULTET U NISU,PROJEKAT IZ WEB-a`;
+        this.container.appendChild(footer); 
+        
+    
     }
 
     drawSearchArea(host)
@@ -123,13 +134,13 @@ export class Shop
         searchBtt.innerHTML="Search";
         searchBtt.classList.add("searchBtt");
         searchBtt.onclick=ev =>{
-                const inp=document.querySelector(".maxPrice").value;
+                const inp=this.container.querySelector(".maxPrice").value;
                 if(inp=="")
                     alert("Enter price range!");
                 else{
-                    const vinArr=document.querySelector(".vinylArray");
+                    const vinArr=this.container.querySelector(".vinylArray");
                     vinArr.innerHTML="";
-                    const currentGenre=document.querySelector(".genreTitle").innerHTML;
+                    const currentGenre=this.container.querySelector(".genreTitle").innerHTML;
                     let i=0;
                     this.genres.forEach(el=>
                         {
@@ -137,7 +148,7 @@ export class Shop
                             {
                                 el.getVinyls().forEach(v => {
                                     if(v.getPrice()<= inp)
-                                       { v.drawVinyl(vinArr);
+                                       { v.drawVinyl(vinArr,this.container);
                                          i++;
                                        }
                                 })
@@ -145,7 +156,7 @@ export class Shop
                                 {
                                     alert("No records were found");
                                     el.getVinyls().forEach(v => {
-                                        v.drawVinyl(vinArr);
+                                        v.drawVinyl(vinArr,this.container);
                                 });
                                 }
                                 else
@@ -164,16 +175,16 @@ export class Shop
             refreshhBtt.hidden=true;
             refreshhBtt.onclick=ev =>{
                 
-                const vinArr=document.querySelector(".vinylArray")
+                const vinArr=this.container.querySelector(".vinylArray")
                 vinArr.innerHTML="";
-                const currentGenre=document.querySelector(".genreTitle").innerHTML;
+                const currentGenre=this.container.querySelector(".genreTitle").innerHTML;
                 this.genres.forEach(el=>
                     {
                         if(el.getName() == currentGenre )
                         {
                             el.getVinyls().forEach(v => {
                                 
-                                    v.drawVinyl(vinArr);
+                                    v.drawVinyl(vinArr,this.container);
                             });
                         }
                     });
@@ -185,10 +196,10 @@ export class Shop
 
     AddOrUpdateVinyl(type)
     {
-        const namee =document.querySelector(".Album").value;
-        const performerr =document.querySelector(".Performer").value;
-        const pricee =document.querySelector(".Price").value;
-        const imgg=document.querySelector(".Cover").value;
+        const namee =this.container.querySelector(".Album").value;
+        const performerr =this.container.querySelector(".Performer").value;
+        const pricee =this.container.querySelector(".Price").value;
+        const imgg=this.container.querySelector(".Cover").value;
         
 
         if(type=="Add")
@@ -197,7 +208,7 @@ export class Shop
             let a;
         this.genres.forEach(el =>
             {
-                if(el.name===document.querySelector(".genreTitle").innerHTML)
+                if(el.name===this.container.querySelector(".genreTitle").innerHTML)
                 {
                     a=el;
                 }
@@ -230,7 +241,7 @@ export class Shop
         }
         else if(type=="Update")
         {
-            const idd=document.querySelector(".add").value;;
+            const idd=this.container.querySelector(".add").value;;
 
         fetch("https://localhost:5001/Record/UpdateVinyl",{
                         method: "PUT",
@@ -264,22 +275,22 @@ export class Shop
 
     resetForm()
     {
-        let edit=document.querySelector(".Album");
+        let edit=this.container.querySelector(".Album");
         edit.value="";
 
-         edit=document.querySelector(".Performer");
+         edit=this.container.querySelector(".Performer");
         edit.value="";
 
-         edit=document.querySelector(".Price");
+         edit=this.container.querySelector(".Price");
         edit.value=null;
 
-         edit=document.querySelector(".Cover");
+         edit=this.container.querySelector(".Cover");
         edit.value="";
 
-         edit=document.querySelector(".add");
+         edit=this.container.querySelector(".add");
          edit.innerHTML="Add";
         edit.value=this.id;
-        edit=document.querySelector(".maxPrice");
+        edit=this.container.querySelector(".maxPrice");
         edit.value="";
     }
 }

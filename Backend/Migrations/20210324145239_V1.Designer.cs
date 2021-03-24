@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Back_End.Migrations
 {
     [DbContext(typeof(RecordContext))]
-    [Migration("20210303151641_V1")]
+    [Migration("20210324145239_V1")]
     partial class V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,20 @@ namespace Back_End.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BannerImg")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("BannerImg");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("Location");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("Name");
 
                     b.HasKey("ID");
 

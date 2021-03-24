@@ -50,6 +50,20 @@ namespace Back_End.Migrations
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BannerImg")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("BannerImg");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("Location");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("Name");
+
                     b.HasKey("ID");
 
                     b.ToTable("Shop");

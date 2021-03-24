@@ -25,7 +25,7 @@ namespace Backend.Pages
             var genre = await context.Genres.FindAsync(id);
             context.Remove(genre);
             await context.SaveChangesAsync();
-            return RedirectToPage("./Genres");
+            return RedirectToPage("./Shops");
         }
     }
 }

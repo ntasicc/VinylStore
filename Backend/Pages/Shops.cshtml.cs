@@ -9,19 +9,17 @@ using Backend.Models;
 
 namespace  Backend.Pages
 {
-    public class GenresModel : PageModel
+    public class ShopsModel : PageModel
     {
         private RecordContext context;
-        public List<Genre> Gen {get; set;}
-        public int ShopID {get;set;}
-        public GenresModel(RecordContext c)
+        public List<Shop> Shopss {get; set;}
+        public ShopsModel(RecordContext c)
         {
             context=c;
         }
-        public async Task OnGet(int id)
+        public async Task OnGet()
         {
-            ShopID=id;
-            Gen = await context.Genres.Where(g =>g.Shop.ID==id).ToListAsync();
+            Shopss = await context.Shops.ToListAsync();
         }
     }
 }

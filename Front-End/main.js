@@ -7,7 +7,7 @@ fetch("http://localhost:5000/Record/ReadShop", {
 }).then(p => {
     p.json().then(data =>{
         data.forEach(shop => {
-          const shop1= new Shop();
+          const shop1= new Shop(shop.id,shop.name,shop.location,shop.bannerImg);
           shop.genres.forEach(gen=>{
             const gen1= new Genre(gen.name,gen.id);
             gen.vinyls.forEach(vin=>

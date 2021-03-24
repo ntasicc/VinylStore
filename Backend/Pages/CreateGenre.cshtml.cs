@@ -15,27 +15,32 @@ namespace Backend.Pages
         public Genre Genre{get; set;}
 
         private RecordContext context;
+        public Shop Shop {get; set;}
 
         public CreateGenreModel(RecordContext c)
         {
             context=c;
         }
-        public void OnGet()
+       public void OnGet()
         {
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            var shop= await context.Shops.FirstOrDefaultAsync();
-            Genre.Shop=shop;
+            Shop= await context.Shops.FindAsync(id);
+            if(Shop==null)
+            {
+                return Page();
+            }
+            Genre.Shop=Shop;
             context.Genres.Add(Genre);
             await context.SaveChangesAsync();
 
-            return RedirectToPage("./Genres");
+            return RedirectToPage("./Shops");
         }
     }
 }

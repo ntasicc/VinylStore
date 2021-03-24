@@ -73,3 +73,4 @@ C:\Users\tasic\VinylStore\Backend\obj\Debug\net5.0\Back-End.RazorTargetAssemblyI
 C:\Users\tasic\VinylStore\Backend\bin\Debug\net5.0\Back-End.Views.dll
 C:\Users\tasic\VinylStore\Backend\bin\Debug\net5.0\Back-End.Views.pdb
 C:\Users\tasic\VinylStore\Backend\obj\Debug\net5.0\Back-End.Views.pdb
+C:\Users\tasic\VinylStore\Backend\obj\Debug\net5.0\Razor\Pages\Shops.cshtml.g.cs

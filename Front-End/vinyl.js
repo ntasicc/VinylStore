@@ -8,10 +8,12 @@ export class Vinyl
         this.price=price;
         this.img=img;
         this.miniCont=null;
+        this.mainCont=null;
     }
 
-    drawVinyl(host)
+    drawVinyl(host,mCont)
     {
+        this.mainCont=mCont;
         this.miniCont=document.createElement("div");
         this.miniCont.classList.add("vinyl");
         host.appendChild(this.miniCont);
@@ -93,19 +95,19 @@ export class Vinyl
 
     fillEditForm()
     {
-        let edit=document.querySelector(".Album");
+        let edit=this.mainCont.querySelector(".Album");
         edit.value=this.name;
 
-         edit=document.querySelector(".Performer");
+         edit=this.mainCont.querySelector(".Performer");
         edit.value=this.performer;
 
-         edit=document.querySelector(".Price");
+         edit=this.mainCont.querySelector(".Price");
         edit.value=this.price;
 
-         edit=document.querySelector(".Cover");
+         edit=this.mainCont.querySelector(".Cover");
         edit.value=this.img;
 
-         edit=document.querySelector(".add");
+         edit=this.mainCont.querySelector(".add");
          edit.innerHTML="Update";
         edit.value=this.id;
 

@@ -37,7 +37,7 @@ namespace Backend.Pages
             Genre.ID=id;
             context.Genres.Update(Genre);
             await context.SaveChangesAsync();
-            return RedirectToPage("./Genres");
+            return RedirectToPage("./Shops");
         }
         
     }
